@@ -1,16 +1,17 @@
-import { SET_SEARCH_RESULTS } from "./actionTypes";
+import { SET_SEARCH_RESULTS, SET_IS_LOADING } from "./actionTypes";
 import { githubAPI } from "../api/api";
 import { ResultType } from "../types/types";
 
 const initialState = {
   searchResults: [] as ResultType[],
+  isLoading: false,
 };
 
 type InitialStateType = typeof initialState;
 
 export const resultsReducer = (
   state = initialState,
-  action: any
+  action: ActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case SET_SEARCH_RESULTS:
@@ -18,10 +19,17 @@ export const resultsReducer = (
         ...state,
         searchResults: action.payload,
       };
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     default:
       return state;
   }
 };
+
+type ActionsTypes = SetSearchResultsActionType | SetIsLoadingActionType;
 
 // Actions
 type SetSearchResultsActionType = {
@@ -36,10 +44,21 @@ export const setSearchResults = (
   payload: results,
 });
 
+type SetIsLoadingActionType = {
+  type: typeof SET_IS_LOADING;
+  payload: boolean;
+};
+export const setIsLoading = (status: boolean) => ({
+  type: SET_IS_LOADING,
+  payload: status,
+});
+
 // Thunks
 export const searchRepositories = (query: string) => async (
   dispatch: Function
 ) => {
+  dispatch(setIsLoading(true));
   const result = await githubAPI.searchRepositories(query);
   dispatch(setSearchResults(result));
+  dispatch(setIsLoading(false));
 };
