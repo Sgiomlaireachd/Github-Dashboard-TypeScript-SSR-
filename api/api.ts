@@ -9,4 +9,10 @@ export const githubAPI = {
     const response = await axiosInstance.get(`/search/repositories?q=${query}`);
     return response.data.items;
   },
+  getRepoInfo: async (repoAuthor: string, repoName: string) => {
+    const response = await axiosInstance.get(
+      `/repos/${repoAuthor}/${repoName}`
+    );
+    return response.data;
+  },
 };

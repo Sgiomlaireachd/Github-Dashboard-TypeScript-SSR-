@@ -36,8 +36,11 @@ const SearchResults: React.FC<SearchResultsProps> = (props) => {
           </Typography.Link>
         }
       />
-      <Link href="/repo/[repoId]" as={`/repo/${item.id}`}>
-        <Button style={{ marginTop: "20px" }}>Info</Button>
+      <Link
+        href="/repo/[repoAuthor]/[repoName]"
+        as={`/repo/${item.owner.login}/${item.name}`}
+      >
+        <Button style={{ marginTop: "20px", padding: "5px 20px" }}>Info</Button>
       </Link>
     </Card>
   ));

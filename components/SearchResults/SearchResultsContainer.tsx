@@ -5,6 +5,7 @@ import { searchRepositories } from "../../redux/results-reducer";
 import { connect } from "react-redux";
 import { ResultType } from "../../types/types";
 import { Typography, Spin } from "antd";
+import { NextPageContext, GetStaticProps } from "next";
 
 const { Text } = Typography;
 
@@ -28,7 +29,6 @@ const SearchResultsContainer: React.FC<SearchResultsContainerProps> = ({
   isLoading,
   searchRepositories,
 }) => {
-  useEffect(() => {}, []);
   useEffect(() => {
     if (searchQuery) searchRepositories(searchQuery);
   }, [searchQuery]);

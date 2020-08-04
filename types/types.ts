@@ -6,4 +6,10 @@ export type ResultType = {
   html_url: string;
   updated_at: string;
   pushed_at: string;
+  owner: {
+    id: number;
+    login: string;
+    html_url: string;
+    avatar_url: string;
+  };
 };

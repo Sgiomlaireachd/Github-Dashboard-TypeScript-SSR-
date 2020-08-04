@@ -9,10 +9,8 @@ const history = createMemoryHistory();
 const MainLayout = (props) => {
   return (
     <>
-      <Provider store={store}>
-        <SearchBarContainer />
-        {props.children}
-      </Provider>
+      <SearchBarContainer />
+      {props.children}
     </>
   );
 };
