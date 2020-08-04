@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import { Card, Avatar } from "antd";
-import { githubAPI } from "../../api/api";
 import { ResultType } from "../../types/types";
 
-const RepoCardContainer = (props) => {
-  const repo = props.repo;
-  const router = useRouter();
-  console.log("PROPS REPO:", repo);
-  // const [repo, setRepo] = useState<ResultType>(null);
+type RepoProps = {
+  repo: ResultType;
+};
 
-  // useEffect(() => {
-  //   const apiCall = async () => {
-  //     const { repoAuthor, repoName } = router.query;
-  //     const res: ResultType = await githubAPI.getRepoInfo(repoAuthor, repoName);
-  //     console.log(res);
-  //     setRepo(res);
-  //   };
-  //   apiCall();
-  // }, []);
-
+const RepoCard: React.FC<RepoProps> = ({ repo }) => {
   if (!repo) {
     return <Card bordered loading={true}></Card>;
   }
@@ -72,4 +59,4 @@ const RepoCardContainer = (props) => {
   );
 };
 
-export default RepoCardContainer;
+export default RepoCard;
